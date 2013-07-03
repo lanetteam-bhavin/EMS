@@ -1,0 +1,53 @@
+<div class="row-fluid">
+  <span class="span4">
+    <%= image_tag @employee.image,:alt => "No Image",class: "img-rounded",:height => "100px",:width => "100px" %>
+    </span>
+    <span class="span8">
+      <table class="table" border="1">
+        <tr>
+          <td>First Name:</td>
+          <td><%=  @employee.FirstName %></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><%=  @employee.LastName %></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><%=  @employee.email %></td>
+        </tr>
+        <tr>
+          <td>Address:</td>
+          <td><%=  @employee.address %></td>
+        </tr>
+        <tr>
+          <td>City:</td>
+          <td><%=  @employee.city %></td>
+        </tr>
+        <tr>
+          <td>State:</td>
+          <td><%=  @employee.state %></td>
+        </tr>
+        <tr>
+          <td>Designation:</td>
+          <td><%=  @designation.desig_name %></td>
+        </tr>
+        <tr>
+          <td>Employee Class:</td>
+          <td><%=  "Class "+@classname if !@classname.empty? %></td>
+        </tr>
+        <tr>
+          <td>Skills:</td>
+          <td>
+            <ul>
+              <% for skill in @employee.employeeskill %>
+                <li type="dish">
+                  <%= Skill.find(skill.skill_id).skill_name %>
+                </li>
+              <% end  %>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </span>
+  </div>

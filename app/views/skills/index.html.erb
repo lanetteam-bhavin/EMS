@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="span4">
+		<h1>Add Skills</h1>
+			<%= form_for @skill do |f| %>
+			<%= render "shared/error_messages",:target => @skill %>
+			<%= f.label "Skill Name" %>
+			<%= f.text_field :skill_name %>
+			<%= f.submit "Add skill",class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="span8">
+		<table class="table">
+			<thead>
+				<tr>
+  				<th>Skill Name</th>
+  				</tr>
+  			</thead>
+  			<% @skills.each do |skill| %>
+    		<tbody>
+    			<tr>
+    				<td>
+    					<%= skill.skill_name %>
+  					</td>
+  				</tr>
+  			</tbody>
+  		<% end %>
+	</table>
+</div>
+</div>

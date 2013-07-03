@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="span4">
+		<h1>Add Designation</h1>
+			<%= form_for @designation do |f| %>
+			<%= render "shared/error_messages",:target => @designation %>
+			<%= f.label "Designation Name" %>
+			<%= f.text_field :desig_name %>
+			<%= f.submit "Add Designation",class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="span8">
+		<table class="table">
+			<thead>
+				<tr>
+  				<th>Designation Name</th>
+  				</tr>
+  			</thead>
+  			<% @designations.each do |designation| %>
+    		<tbody>
+    			<tr>
+    				<td>
+    					<%= designation.desig_name %>
+  					</td>
+  				</tr>
+  			</tbody>
+  		<% end %>
+	</table>
+</div>
+</div>

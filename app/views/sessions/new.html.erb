@@ -1,0 +1,12 @@
+<H1>Sign In For Admin</H1>
+<%= form_for(:session,url: sessions_path) do |f| %>
+  <p>
+    <%= f.label :AdminEmail %><br />
+    <%= f.text_field :AdminEmail %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p class="button"><%= f.submit "Log in as admin",class: "btn btn-primary" %></p>
+  <% end %> 

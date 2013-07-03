@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="span4">
+		<h1>Edit Employee</h1>
+			<%= form_for @employee,:html => {:multipart => true} do |f| %>
+			<%= render "shared/error_messages",:target => @employee %>
+				<%= f.label :FirstName %>
+				<%= f.text_field :FirstName %>
+				
+				<%= f.label :LastName %>
+				<%= f.text_field :LastName %>
+
+				<%= f.label :email %>
+				<%= f.text_field :email %>
+
+				<%= f.label :address %>
+				<%= f.text_area :address,:rows => 5,:cols => 40 %>
+
+				<%= f.label :city %>
+				<%= f.text_field :city %>
+
+				<%= f.label :state %>
+				<%= f.text_field :state %>
+
+				<%= f.label :designation %>
+				<%= collection_select("employee",:designation_id,Designation.all,:id,:desig_name) %>
+
+				<%= f.label :EmployeeClass %>
+				<%= f.select :empclass,options_for_select([['CLASS I',1],['CLASS II',2],['CLASS III',3],['CLASS IV',4]]) %>
+
+				<%= f.file_field :image %>
+			<%= f.submit "Edit Employee",class: 'btn btn-primary' %>
+			<% end %>
+	</div>
+	<div class="span4">
+Hello
+<%= form_tag complete_path, :method => :post do %>
+  <ul>
+    <% @skills.each do |task| %>
+    <li>
+      <%= check_box_tag "skill_ids[]", task.id,@employeeskill.include?(task.id) %>
+      <%= task.skill_name %>
+    </li>
+  <% end %>
+  </ul>
+<input type="hidden" name="emp_id" value="<%= @employee.id %> " id="emp_id">
+  <%= submit_tag "Mark as Complete" %>
+<% end %>
+
+
+	</div>
+	<div class="span4">
+</div>
+</div>
+<pre>
+</pre>

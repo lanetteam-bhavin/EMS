@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="span4">
+		<h1>Add Employee</h1>
+			<%= form_for @employee do |f| %>
+			<%= f.label :FirstName %>
+			<%= f.text_field :FirstName %>
+
+			<%= f.label :LastName %>
+			<%= f.text_field :LastName %>
+
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+
+			<%= f.submit "Add Designation",class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>

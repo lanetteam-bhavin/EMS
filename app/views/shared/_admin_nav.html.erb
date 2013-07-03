@@ -1,0 +1,12 @@
+<h1>Welcome Admin : <%= current_user.AdminName%> </h1>
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Manages:</a>
+     <ul class="nav">
+    <li> <%= link_to "Employees",employees_path %>      </li>
+    <li> <%= link_to "Designations",designations_path %></li>
+    <li> <%= link_to "Skills",skills_path %>            </li>
+  </ul>
+  </div>
+</div>
+

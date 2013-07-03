@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EMS</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'jquery-ui-1.10.3.custom.css' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+      <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar">Sign In</span>
+            <span class="icon-bar">Sign Up</span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Welcome to EMS</a>
+          <ul class="nav">
+            <div class="user_nav">
+              <% if current_user %>
+                Logged in as: <%= current_user.AdminEmail %>
+                <%= link_to "Sign Out",log_out_path %>
+              <% else %>
+                <%= link_to "Sign In",new_session_path %> OR 
+                <%= link_to "Sign Up",new_admin_path %>
+              <% end %>
+            </div>
+          </ul>
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <!-- .nav, .navbar-search, .navbar-form, etc -->
+          </div>
+        </div>
+      </div>
+    </div>
+<% if current_user %>
+  <%= render 'shared/admin_nav'  %>
+<% end %>
+  <div class="container">
+<%= yield %>
+</div>
+</body>
+</html>

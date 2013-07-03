@@ -1,0 +1,7 @@
+<h1>Add Designation</h1>
+<%= form_for @designation do |f| %>
+	<%= f.label "Designation Name" %>
+	<%= f.text_field :desig_name %>
+
+<%= f.submit "Add Designation",class: "btn btn-primary" %>
+<% end %>
