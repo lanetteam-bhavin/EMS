@@ -1,0 +1,6 @@
+<% for skill in @employeeskill %>
+  <li type="dish">
+    <%=p Skill.find(skill.skill_id).skill_name %>
+  </li>
+<% end  %>
+</ul>

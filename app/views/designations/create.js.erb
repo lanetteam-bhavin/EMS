@@ -1,0 +1,5 @@
+$("#new_designation").before('<div id="flash_notice"><%= escape_javascript(flash.discard(:notice)) %></div>');
+$("counts").html("<%= pluralize(@designation.class.count,'designation') %>");
+$("#designation").append("<%= escape_javascript(render(:partial=>@designation)) %> ");
+$("#new_designation")[0].reset();
+alert('Ajax works !');

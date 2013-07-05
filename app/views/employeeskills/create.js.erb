@@ -1,0 +1,2 @@
+$("#msg").html('<div id="flash_notice"><%= escape_javascript(flash.discard(:notice)) %></div>');
+$("#skills").append("<%= escape_javascript(render(:partial=>@employeeskill,:locals =>{ :variable => @employeeskill })) %> ");

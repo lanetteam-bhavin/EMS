@@ -37,7 +37,8 @@ class EmployeesController < ApplicationController
     @emloyeeskill = @employee.employeeskills.build
     @emloyeeskills =@employee.employeeskills.select(:skill_id).to_a.map { |s| s['skill_id']}
     @employeerec = @employee.employeerecs.build
-    @employeerecs = @employee.employeerecs#.select(:employee_id,:designation_id,:work_from,:work_to)
+    @employeerecs = @employee.employeerecs
+    #.select(:employee_id,:designation_id,:work_from,:work_to)
     #@employeeskill=Employeeskill.where(employee_id: params[:id]).select(:skill_id).to_a.map { |s| s['skill_id']}
   end
   
