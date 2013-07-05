@@ -5,14 +5,23 @@
     <span class="span8">
       <table class="table" border="1">
         <tr>
-          <td>First Name:</td>
-          <td><%=  @employee.FirstName %></td>
+          <th colspan="2" align="center">
+            Employee Profile
+          </th>
         </tr>
         <tr>
-          <td>Last Name:</td>
-          <td><%=  @employee.LastName %></td>
+          <td>Name:</td>
+          <td><%=  @employee.FirstName+" "+@employee.LastName %></td>
         </tr>
         <tr>
+          <td>Birth date:</td>
+          <td><%=  @employee.birthday %></td>
+        </tr>
+        <tr>
+          <td>Joining date:</td>
+          <td><%= @employee.joining_date %>
+        </tr>
+          <tr>
           <td>Email:</td>
           <td><%=  @employee.email %></td>
         </tr>
@@ -40,7 +49,8 @@
           <td>Skills:</td>
           <td>
             <ul>
-              <% for skill in @employee.employeeskill %>
+              
+              <% for skill in @skills %>
                 <li type="dish">
                   <%= Skill.find(skill.skill_id).skill_name %>
                 </li>

@@ -15,3 +15,48 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+
+jQuery.ajaxSetup({
+    'beforesend': function(xhr) {
+        xhr.setRequestHeader("Accept","text/JavaScript")
+    }
+})
+$(document).ready(function() {
+    initpage();
+});
+$(window).bind('page:change',function(){
+    initpage();
+});
+function initpage()
+{
+    $("#new_designation").submit(function(){
+        $.post($(this).attr("action"),$(this).serialize(),null,"script");
+        return false;
+    }); 
+   
+   $("#skill_form").submit(function(){
+       $.post($(this).attr("action"),$(this).serialize(),null,"script");
+       return false;
+   })
+    $("#employee_birthday").datepicker({
+        defaultDate: "-30y",
+        changeMonth: true,
+        changeYear: true
+    });
+    
+    $("#employee_joining_date").datepicker({
+        defaultDate: "-1y",
+        changeMonth: true,
+        changeYear: true,
+        minDate: "-5y -4m",
+        maxDate: "-1d"
+    });
+    
+    $("#employeerec_work_to").datepicker({
+        defaultDate: "-1y",
+        changeMonth: true,
+        changeYear: true,
+        minDate: "-5y -4m",
+        maxDate: "-1d"
+    });
+}

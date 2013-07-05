@@ -1,55 +1,140 @@
-<div class="row">
-	<div class="span4">
-		<h1>Edit Employee</h1>
-			<%= form_for @employee,:html => {:multipart => true} do |f| %>
-			<%= render "shared/error_messages",:target => @employee %>
-				<%= f.label :FirstName %>
-				<%= f.text_field :FirstName %>
-				
-				<%= f.label :LastName %>
-				<%= f.text_field :LastName %>
-
-				<%= f.label :email %>
-				<%= f.text_field :email %>
-
-				<%= f.label :address %>
-				<%= f.text_area :address,:rows => 5,:cols => 40 %>
-
-				<%= f.label :city %>
-				<%= f.text_field :city %>
-
-				<%= f.label :state %>
-				<%= f.text_field :state %>
-
-				<%= f.label :designation %>
-				<%= collection_select("employee",:designation_id,Designation.all,:id,:desig_name) %>
-
-				<%= f.label :EmployeeClass %>
-				<%= f.select :empclass,options_for_select([['CLASS I',1],['CLASS II',2],['CLASS III',3],['CLASS IV',4]]) %>
-
-				<%= f.file_field :image %>
-			<%= f.submit "Edit Employee",class: 'btn btn-primary' %>
-			<% end %>
-	</div>
-	<div class="span4">
-Hello
-<%= form_tag complete_path, :method => :post do %>
-  <ul>
-    <% @skills.each do |task| %>
-    <li>
-      <%= check_box_tag "skill_ids[]", task.id,@employeeskill.include?(task.id) %>
-      <%= task.skill_name %>
-    </li>
-  <% end %>
-  </ul>
-<input type="hidden" name="emp_id" value="<%= @employee.id %> " id="emp_id">
-  <%= submit_tag "Mark as Complete" %>
-<% end %>
-
-
-	</div>
-	<div class="span4">
+<div class="navbar">
+  <div class="navbar-inner"><ul class="nav nav-pills">
+      <li class="active"><a data-toggle="tab" href="#tab1">Edit Employee </a> </li>
+      <li><a data-toggle="tab" href="#tab2">Edit Skill    </a> </li>
+      <li><a data-toggle="tab" href="#tab3">Edit Record   </a> </li>
+    </ul>
+  </div>
 </div>
-</div>
-<pre>
-</pre>
+<div class="tab-content row">
+  <div class="tab-pane active span4" id="tab1">
+    <h1>Edit Employee</h1>
+    <%= form_for @employee,:html => {:multipart => true} do |f| %>
+      <%= render "shared/error_messages",:target => @employee %>
+      <%= f.label :FirstName %>
+      <%= f.text_field :FirstName %>
+
+      <%= f.label :LastName %>
+      <%= f.text_field :LastName %>
+
+      <%= f.label :birthday %>
+      <%= f.text_field :birthday %>
+
+      <%= f.label :joining_date %>
+      <%= f.text_field :joining_date %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :address %>
+      <%= f.text_area :address,:rows => 5,:cols => 40 %>
+
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+
+      <%= f.label :state %>
+      <%= f.text_field :state %>
+
+      <%= f.label :EmployeeClass %>
+      <%= f.select :empclass,options_for_select([['CLASS I',1],['CLASS II',2],['CLASS III',3],['CLASS IV',4]]) %>
+
+      <%= f.label :education %>
+      <%= f.select :education,options_for_select([['Graduate','Graduate'],['Post Graduate','PostGraduate'],['Masters','Masters']]) %>
+
+      <%= f.file_field :image %>
+      <%= f.submit "Edit Employee",class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="tab-pane span4" id="tab2">
+      <div class="alert alert-success" id="msg">
+        Skills
+      </div>  
+      <%= form_tag @emloyeeskill,{:id => "skill_form"} do %>
+        <ul>
+          <% @skills.each do |task| %>
+            <li>
+              <%= check_box_tag "skill_ids[]", task.id,@emloyeeskills.include?(task.id) %>
+              <%= task.skill_name %>
+            </li>
+          <% end %>
+        </ul>
+        <input type="hidden" name="emp_id" value="<%= @employee.id %> " id="emp_id">
+        <%= submit_tag "Add Skill",data: { disable_with: 'Please wait...' } , :class => 'submit' %>
+      <% end %>
+      <div id="skills">
+
+      </div>
+    </div>
+    <div class="tab-pane span8" id="tab3">
+      <div class="alert alert-success" id="skillmsg">
+        Records:
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Work As</th>
+            <th>Work From</th>
+            <th>Work To</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for employeerec in @employeerecs  %>
+            <%  if !(employeerec.designation_id).nil? %>  
+              <tr>
+                <td><%= Designation.find(employeerec.designation_id).desig_name %></td>
+                <td><%= employeerec.work_from.to_s(:long) %> </td>
+                <td>
+                  <% if (employeerec.work_to).nil? %>
+                    <%= "Till Now" %>
+                  <% else  %>
+                    <%= employeerec.work_to.to_s(:long) %> 
+                  <% end %>
+                </td>
+                <td>
+                  <% if (employeerec.work_to).nil? %>
+                    <%= distance_of_time_in_words_to_now(DateTime.parse(employeerec.work_from.to_s)) %>
+                  <% else  %>
+                    <%= distance_of_time_in_words(DateTime.parse(employeerec.work_from.to_s),DateTime.parse(employeerec.work_to.to_s)) %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <table class="table">
+        <%= form_for @employeerec do |f| %>
+          <tr>
+            <td>
+              Promote as:
+            </td>
+            <td>
+              <%= f.label :work_from %>
+            </td>
+            <td>
+              <%= f.label :work_to %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="hidden" name="emp_id" value="<%= @employee.id %> " id="emp_id">
+              <%= collection_select("employeerec",:designation_id,Designation.all,:id,:desig_name) %>
+            </td>
+            <td>
+              <%= f.text_field :work_from %>
+            </td>
+            <td>
+              <%= f.text_field :work_to %>
+            </td>
+            <td>
+              <%= f.submit "Add record",class: 'btn btn-primary' %>
+            </td>
+          </tr>
+        <% end %>
+      </table>  
+    </div>
+  </div>
+  <pre>
+    <%= @employeerecs.inspect %>
+  </pre>

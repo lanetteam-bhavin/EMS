@@ -1,64 +1,74 @@
 <div class="row">
-	<div class="span4">
-		<h1>Add Employee</h1>
-			<%= form_for @employee,:html => {:multipart => true} do |f| %>
-			<%= render "shared/error_messages",:target => @employee %>
-				<%= f.label :FirstName %>
-				<%= f.text_field :FirstName %>
-				
-				<%= f.label :LastName %>
-				<%= f.text_field :LastName %>
+  <div class="span4">
+    <h1>Add Employee</h1>
+    <%= form_for @employee,:html => {:multipart => true} do |f| %>
+      <%= render "shared/error_messages",:target => @employee %>
+      <%= f.label :FirstName %>
+      <%= f.text_field :FirstName %>
 
-				<%= f.label :email %>
-				<%= f.text_field :email %>
+      <%= f.label :LastName %>
+      <%= f.text_field :LastName %>
 
-				<%= f.label :address %>
-				<%= f.text_area :address,:rows => 5,:cols => 40 %>
+      <%= f.label :birthday %>
+      <%= f.text_field :birthday %>
 
-				<%= f.label :city %>
-				<%= f.text_field :city %>
+      <%= f.label :joining_date %>
+      <%= f.text_field :joining_date %>
 
-				<%= f.label :state %>
-				<%= f.text_field :state %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
 
-				<%= f.label :designation %>
-				<%= collection_select("employee",:designation_id,Designation.all,:id,:desig_name) %>
+      <%= f.label :address %>
+      <%= f.text_area :address,:rows => 5,:cols => 40 %>
 
-				<%= f.label :EmployeeClass %>
-				<%= f.select :empclass,options_for_select([['CLASS I',1],['CLASS II',2],['CLASS III',3],['CLASS IV',4]]) %>
+      <%= f.label :city %>
+      <%= f.text_field :city %>
 
-				<%= f.file_field :image %>
-			<%= f.submit "Add Employee",class: 'btn btn-primary' %>
-			<% end %>
-	</div>
-	<div class="span8">
-		<table class="table" border="1">
-			<thead>
-				<tr>
-					<th>Name  </th>
-					<th>Designation</th>
-					<th>Photo </th>
-					<th>Show </th>
-				</tr>
-			</thead>
-			<tbody>
-			<% @employees.each do |employee| %>
-				<tr>
-					<td>
-					<%=	employee.FirstName %> <%= employee.LastName %>
-					</td>
-					<td>
-						<%= employee.designation.desig_name %>
-					</td>
-					<td>
-						<%= image_tag(employee.image,:alt => "No Image",class: "img-rounded",:height => "100px",:width => "100px") %>
-					</td>
-					<td><%= link_to "Show",employee %> <%= link_to "Edit",edit_employee_path(employee) %></td>
-				</tr>
-			<% end %>
-			</tbody>
-		</table>
-</div>
-</div>
-<pre>
-</pre>
+      <%= f.label :state %>
+      <%= f.text_field :state %>
+
+      <%= f.label :designation %>
+      <%= collection_select("employee",:designation_id,Designation.all,:id,:desig_name) %>
+
+      <%= f.label :EmployeeClass %>
+      <%= f.select :empclass,options_for_select([['CLASS I',1],['CLASS II',2],['CLASS III',3],['CLASS IV',4]]) %>
+
+      <%= f.label :education %>
+      <%= f.select :education,options_for_select([['Graduate','Graduate'],['Post Graduate','PostGraduate'],['Masters','Masters']]) %>
+
+      <%= f.file_field :image %>
+      <%= f.submit "Add Employee",class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="span8">
+      <table class="table" border="1">
+        <thead>
+          <tr>
+            <th>Name  </th>
+            <th>Designation</th>
+            <th>Photo </th>
+            <th>Show </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @employees.each do |employee| %>
+            <tr>
+              <td>
+                <%=	employee.FirstName %> <%= employee.LastName %>
+              </td>
+              <td>
+                <%= employee.designation.desig_name %>
+              </td>
+              <td>
+                <%= image_tag(employee.image,:alt => "No Image",class: "img-rounded",:height => "100px",:width => "100px") %>
+                </td>
+                <td><%= link_to "Show",employee %> <%= link_to "Edit",edit_employee_path(employee) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <pre>
+      <%= debug @employee %>
+    </pre>

@@ -6,8 +6,12 @@ class DesignationsController < ApplicationController
   def create
     @designation = Designation.new(designation_params)
     if @designation.save
-    	flash[:message]="Designation add !"
-    	redirect_to designations_path
+    	flash[:notice] = "Designation Added"
+      respond_to do |format|
+        format.html {redirect_to @designation}
+        format.js 
+      end
+    	
     else
     	render 'index'
   	end

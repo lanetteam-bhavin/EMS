@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130703072122) do
+ActiveRecord::Schema.define(version: 20130704122758) do
 
   create_table "admins", force: true do |t|
     t.string   "AdminName",       limit: 25
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20130703072122) do
 
   create_table "designations", force: true do |t|
     t.string   "desig_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employeerecs", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "designation_id"
+    t.date     "work_from"
+    t.date     "work_to"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,6 +51,9 @@ ActiveRecord::Schema.define(version: 20130703072122) do
     t.boolean  "IsActive"
     t.boolean  "IsDelete"
     t.string   "image"
+    t.string   "education",      limit: 50
+    t.date     "birthday"
+    t.date     "joining_date"
   end
 
   create_table "employeeskills", force: true do |t|

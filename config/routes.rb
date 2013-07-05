@@ -14,6 +14,7 @@ EMS::Application.routes.draw do
   resources :empmasters
   resources :skills
   resources :employeeskills
+  resources :employeerecs
   root 'sessions#new'
   get "log_out" => "sessions#destroy",:as => "log_out"
   post "complete" => "employeeskills#complete",:as=> "complete"
